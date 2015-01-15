@@ -30,10 +30,10 @@ AppAsset::register($this);
 
     <script type="text/javascript" src="js/app.js"></script>
     <script type="text/javascript" src="js/config.js"></script>
-    <script type="text/javascript" src="js/controllers/controller.js"></script>
+    <script type="text/javascript" src="js/controllers/MainController.js"></script>
     <script type="text/javascript" src="js/controllers/RegisterFormCtrl.js"></script>
     <script type="text/javascript" src="js/controllers/LoginFormCtrl.js"></script>
-    <script type="text/javascript" src="js/services/user.js"></script>
-    <script type="text/javascript" src="js/services/product.js"></script>
+    <script type="text/javascript" src="js/services/User.js"></script>
+    <script type="text/javascript" src="js/services/Product.js"></script>
 </body>
 </html>
