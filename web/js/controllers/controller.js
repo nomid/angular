@@ -1,10 +1,13 @@
 app.controller('mainController', 
 	['$scope', '$http', '$location', '$route', '$resource', 'User',
-	function ($scope, $http, $location, $route, $resource, User) {
+	function ($scope, $http, $location, $route, $resource, User) {	
 
-		var user = new User('test test');
-		$scope.user = user;
-		console.log(user);
+		window.User = new User(1);
+
+		$scope.template = 'templates/login_form.html';
+		// var user = new User('test test');
+		// $scope.user = user;
+		// console.log(user);
 		
 		$scope.test = 'its test from controller';
 

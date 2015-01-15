@@ -1,14 +1,15 @@
-app.factory('User', [function () {
-	function User(name){
-		if(name){
-			this.setName(name);
+app.factory('User', ['$resource', function ($resource) {
+	function User(id){
+		var resource = $resource('/users/:userId', {userId: '@id'});
+		if(id){
+			return new resource.get({userId: id});
 		}
+		return new resource()
 	};
 
 	User.prototype = {
-		name: 'test name',
-		setName: function(name){
-			this.name = name;
+		register: function(){
+			console.log(this.resource);
 		}
 	};
 	

@@ -80,7 +80,7 @@ class User extends ActiveRecord implements \yii\web\IdentityInterface
     public function rules()
     {
         return [
-            [['name', 'email', 'password', 'repeat_password'], 'required'],
+            [['email', 'password', 'repeat_password'], 'required'],
             ['email', 'email'],
             ['email', 'unique'],
             ['repeat_password', 'compare', 'compareAttribute' => 'password'],
@@ -104,12 +104,11 @@ class User extends ActiveRecord implements \yii\web\IdentityInterface
 
     public function validatePassword($password)
     {
-        if(!$this->is_activated){
-            $this->addError('email', 'User is not activated');
-            return false;
-        }
+//        if(!$this->is_activated){
+//            $this->addError('email', 'User is not activated');
+//            return false;
+//        }
         if(Yii::$app->getSecurity()->validatePassword($password, $this->password)){
-            $this->login();
             return true;
         }
         else{
@@ -135,6 +134,11 @@ class User extends ActiveRecord implements \yii\web\IdentityInterface
     public function login()
     {
         return Yii::$app->user->login($this, $this->rememberMe ? 3600*24*30 : 0);
+    }
+
+    public function generateNewAuthKey()
+    {
+        $this->update(false, ['auth_key' => Yii::$app->security->generateRandomKey()]);
     }
 
     public function attributeLabels()

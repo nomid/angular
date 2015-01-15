@@ -9,7 +9,9 @@ class m141126_192107_users_table extends Migration
     {
         $this->createTable('users', [
             'id' => 'pk',
-            'name' => Schema::TYPE_STRING . ' NOT NULL',
+            'first_name' => Schema::TYPE_STRING . ' NOT NULL',
+            'last_name' => Schema::TYPE_STRING . ' NOT NULL',
+            'phone_number' => Schema::TYPE_STRING . ' NOT NULL',
             'email' => Schema::TYPE_STRING . ' NOT NULL',
             'password' => Schema::TYPE_STRING . ' NOT NULL',
             'auth_key' => Schema::TYPE_STRING . ' NOT NULL',

@@ -12,10 +12,15 @@ $config = [
             'showScriptName' => false,
             'rules' => [
                 'test' => 'site/test',
+                ['class' => 'yii\rest\UrlRule', 'controller' => 'user'],
+                ['class' => 'yii\rest\UrlRule', 'controller' => 'product'],
             ],
         ],
         'request' => [
             // !!! insert a secret key in the following (if it is empty) - this is required by cookie validation
+            'parsers' => [
+                'application/json' => 'yii\web\JsonParser',
+            ],
             'cookieValidationKey' => 'cxvgrt43223ed23e',
         ],
         'cache' => [
