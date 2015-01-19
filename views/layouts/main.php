@@ -20,6 +20,7 @@ AppAsset::register($this);
     <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.2.26/angular-route.js"></script>
     <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.2.26/angular-resource.js"></script>
     <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.2.26/angular-animate.js"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.2.26/angular-cookies.js"></script>
     <?= Html::csrfMetaTags() ?>
     <title>Angular JS</title>
     <?php $this->head() ?>
@@ -33,6 +34,7 @@ AppAsset::register($this);
     <script type="text/javascript" src="js/controllers/MainController.js"></script>
     <script type="text/javascript" src="js/controllers/RegisterFormCtrl.js"></script>
     <script type="text/javascript" src="js/controllers/LoginFormCtrl.js"></script>
+    <script type="text/javascript" src="js/controllers/ProductCtrl.js"></script>
     <script type="text/javascript" src="js/services/User.js"></script>
     <script type="text/javascript" src="js/services/Product.js"></script>
 </body>

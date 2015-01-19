@@ -1,15 +1,15 @@
-app.factory('User', ['$resource', function ($resource) {
-	function User(id){
-		var resource = $resource('/users/:userId', {userId: '@id'});
-		if(id){
-			return new resource.get({userId: id});
-		}
-		return new resource()
+app.factory('User', ['$http', function ($http) {
+	function User(){
+		
 	};
 
 	User.prototype = {
-		register: function(){
-			console.log(this.resource);
+		get_by_access_token: function(access_token){
+			$http.post('user/by-access-token', {access_token: access_token})
+				.success(function(data){
+					console.log(data);
+					angular.extend(User.prototype, data.user);
+				});
 		}
 	};
 	

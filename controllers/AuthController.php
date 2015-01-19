@@ -26,9 +26,11 @@ class AuthController extends Controller{
         $user = User::findByEmail($login_data['email']);
         if(isset($user) && $user->validatePassword($login_data['password'])){
             $user->generateNewAuthKey();
+            $user->generateAccessToken();
+            $user->login();
             $result = [
                 'status' => 'ok',
-                'hash'   => $user->auth_key,
+                'access_token'   => $user->access_token,
             ];
         }
 

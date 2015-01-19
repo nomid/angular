@@ -12,7 +12,7 @@ $config = [
             'showScriptName' => false,
             'rules' => [
                 'test' => 'site/test',
-                ['class' => 'yii\rest\UrlRule', 'controller' => 'user'],
+//                ['class' => 'yii\rest\UrlRule', 'controller' => 'user'],
                 ['class' => 'yii\rest\UrlRule', 'controller' => 'product'],
             ],
         ],
@@ -29,6 +29,8 @@ $config = [
         'user' => [
             'identityClass' => 'app\models\User',
             'enableAutoLogin' => true,
+            'loginUrl' => null,
+            'enableSession' => false,
         ],
         'errorHandler' => [
             'errorAction' => 'site/error',

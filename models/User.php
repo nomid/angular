@@ -3,6 +3,7 @@
 namespace app\models;
 use yii\db\ActiveRecord;
 use Yii;
+use \yii\web\Cookie;
 
 /**
  * This is the model class for table "users".
@@ -20,7 +21,7 @@ use Yii;
 class User extends ActiveRecord implements \yii\web\IdentityInterface
 {
     public $repeat_password;
-    public $rememberMe;
+    public $remember_me;
 
     private static $_user;
 
@@ -109,6 +110,7 @@ class User extends ActiveRecord implements \yii\web\IdentityInterface
 //            return false;
 //        }
         if(Yii::$app->getSecurity()->validatePassword($password, $this->password)){
+//            $this->login();
             return true;
         }
         else{
@@ -124,6 +126,7 @@ class User extends ActiveRecord implements \yii\web\IdentityInterface
             if ($this->isNewRecord) {
                 $security = Yii::$app->getSecurity();
                 $this->auth_key = $security->generateRandomString();
+                $this->access_token = $security->generateRandomString();
                 $this->password = $security->generatePasswordHash($this->password);
             }
             return true;
@@ -133,12 +136,25 @@ class User extends ActiveRecord implements \yii\web\IdentityInterface
 
     public function login()
     {
-        return Yii::$app->user->login($this, $this->rememberMe ? 3600*24*30 : 0);
+        $cookie = new Cookie([
+            'name' => 'access_token',
+            'value' => $this->access_token,
+            'expire' => $this->remember_me ? 3600*24*30 : 0,
+        ]);
+
+        $expire = $this->remember_me ? 3600*24*30 : 0;
+        setcookie('access_token', $this->access_token, $expire, '/');
+        return Yii::$app->user->login($this, $expire);
     }
 
     public function generateNewAuthKey()
     {
-        $this->update(false, ['auth_key' => Yii::$app->security->generateRandomKey()]);
+        $this->update(false, ['auth_key' => Yii::$app->security->generateRandomString()]);
+    }
+
+    public function generateAccessToken()
+    {
+        $this->update(false, ['access_token' => Yii::$app->security->generateRandomString()]);
     }
 
     public function attributeLabels()

@@ -1,2 +1,2 @@
 var app = angular.module('cleveroad',
-	['ngRoute', 'ngResource', 'ngAnimate']);
+	['ngRoute', 'ngResource', 'ngAnimate', 'ngCookies']);
